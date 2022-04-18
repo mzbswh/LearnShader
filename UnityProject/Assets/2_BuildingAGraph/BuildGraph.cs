@@ -11,6 +11,9 @@ public class BuildGraph : MonoBehaviour
     [SerializeField, Range(10, 100)]
     int resolution = 10;
 
+    [SerializeField]
+    FunctionLibrary.FunctionName function;
+
     Transform[] points;
 
     private void Awake()
@@ -37,7 +40,7 @@ public class BuildGraph : MonoBehaviour
         {
             Transform point = points[i];
             Vector3 position = point.localPosition;
-            position.y = Mathf.Sin(Mathf.PI * (position.x + time));
+            position.y = FunctionLibrary.GetFunction(function)(position.x, time);
             point.localPosition = position;
         }
     }
